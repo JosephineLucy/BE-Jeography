@@ -1,0 +1,33 @@
+{
+  "name": "be-jeography",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "seed": "node ./db/seeds/run-seed.js",
+    "start": "node listen.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JosephineLucy/BE-Jeography.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JosephineLucy/BE-Jeography/issues"
+  },
+  "homepage": "https://github.com/JosephineLucy/BE-Jeography#readme",
+  "devDependencies": {
+    "husky": "^8.0.1",
+    "jest": "^28.1.3",
+    "nodemon": "^2.0.19",
+    "supertest": "^6.2.4"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1"
+  }
+}

@@ -2,25 +2,26 @@
 // require("dotenv").config({ path: "./config.env" });
 
 const express = require("express");
-const { getUsers} = require("./controllers/jeography")
+const { getUsers } = require("./controllers/jeography");
 const cors = require("cors");
 
 // // get MongoDB driver connection
-// const dbo = require("./db/connection");
+const dbo = require("./db/connection");
 
 const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(cors());
+
 app.use(express.json());
 
 app.get("/users", getUsers);
 
 // Global error handling
-app.use(function (err, _req, res) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
+// app.use(function (err, _req, res) {
+//   console.error(err.stack);
+//   // res.status(500).send("Something broke!");
+// });
 
 // perform a database connection when the server starts
 dbo.connectToServer(function (err) {

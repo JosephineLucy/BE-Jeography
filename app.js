@@ -2,7 +2,7 @@
 // require("dotenv").config({ path: "./config.env" });
 
 const express = require("express");
-const { getUsers } = require("./controllers/jeography");
+const { getUsers, postStudent } = require("./controllers/jeography.controller");
 const cors = require("cors");
 
 // // get MongoDB driver connection
@@ -16,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/users", getUsers);
+app.post("/student", postStudent);
 
 // Global error handling
 // app.use(function (err, _req, res) {

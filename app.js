@@ -2,7 +2,7 @@
 // require("dotenv").config({ path: "./config.env" });
 
 const express = require("express");
-const { getUsers, getCountry } = require("./controllers/jeography");
+const { getUsers, getCountry } = require("./controllers/jeography.controllers");
 const cors = require("cors");
 
 // // get MongoDB driver connection

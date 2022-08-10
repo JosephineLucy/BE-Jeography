@@ -1,4 +1,4 @@
-const { selectUsers, selectCountry } = require("../models/jeography");
+const { selectUsers, selectCountry } = require("../models/jeography.models");
 
 exports.getUsers = (req, res) => {
   selectUsers().then((users) => {

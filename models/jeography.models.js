@@ -45,7 +45,6 @@ exports.insertStudent = (newStudent) => {
   });
 };
 
-
 exports.updateUserPointsByStudentUsername = (username, updatedPoints) => {
   const { userPoints } = updatedPoints;
   return database.run().then((database) => {
@@ -59,7 +58,6 @@ exports.updateUserPointsByStudentUsername = (username, updatedPoints) => {
   });
 };
 
-
 exports.selectProfile = (username) => {
   return database.run().then((database) => {
     return database
@@ -72,3 +70,15 @@ exports.selectProfile = (username) => {
   });
 };
 
+exports.selectComments = (username) => {
+  return database.run().then((database) => {
+    return database
+      .collection("comments")
+      .find({ username: username })
+      .toArray()
+      .then((comments) => {
+        console.log(comments);
+        return comments;
+      });
+  });
+};

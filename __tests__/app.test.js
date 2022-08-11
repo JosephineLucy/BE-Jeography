@@ -119,3 +119,18 @@ describe("POST /student", () => {
     });
   });
 });
+
+describe.only("GET /comments/:username", () => {
+  describe("GET /comments/:username", () => {
+    test("status 200: returns with an object containing the user's comments", () => {
+      return request(app)
+        .get("/comments/mario")
+        .expect(200)
+        .then(() => {
+          expect.objectContaining({
+            username: "mario",
+          });
+        });
+    });
+  });
+});

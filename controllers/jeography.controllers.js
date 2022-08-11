@@ -31,6 +31,8 @@ exports.patchUserPointsByStudentUsername = (request, response) => {
   const updatedPoints = request.body;
   updateUserPointsByStudentUsername(username, updatedPoints).then((student) => {
     response.status(200).send({ student });
+  });
+};
 
 exports.getProfile = (request, response) => {
   const username = request.params.username;

@@ -2,12 +2,12 @@ const {
   selectStudents,
   selectCountry,
   insertStudent,
+  selectProfile,
 } = require("../models/jeography.models");
 
 exports.getStudents = (req, res) => {
   selectStudents().then((students) => {
     res.status(200).send({ students });
-    console.log(res);
   });
 };
 
@@ -22,5 +22,12 @@ exports.postStudent = (request, response) => {
   const newStudent = request.body;
   insertStudent(newStudent).then((student) => {
     response.status(201).send({ student });
+  });
+};
+
+exports.getProfile = (request, response) => {
+  const username = request.params.username;
+  selectProfile(username).then((profile) => {
+    response.status(200).send({ profile });
   });
 };

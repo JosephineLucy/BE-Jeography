@@ -70,6 +70,16 @@ exports.selectProfile = (username) => {
   });
 };
 
+
+exports.updateUserStatusByStudentUsername = (username, updateUserStatus) => {
+  return database.run().then((database) => {
+    return database
+      .collection("usersDB")
+      .updateOne({ username: username }, { $set: updateUserStatus })
+      .then((student) => {
+        return student;
+        });
+
 exports.updateRanchByUsername = (username) => {
   const badges = [
     "https://i.imgur.com/x0cwPla.png",
@@ -89,5 +99,4 @@ exports.updateRanchByUsername = (username) => {
       .then((result) => {
         return result;
       });
-  });
 };

@@ -5,6 +5,7 @@ const {
   updateUserPointsByStudentUsername,
   selectProfile,
   updateUserStatusByStudentUsername,
+  updateRanchByUsername,
 } = require("../models/jeography.models");
 
 exports.getStudents = (req, res) => {
@@ -42,6 +43,7 @@ exports.getProfile = (request, response) => {
   });
 };
 
+
 exports.patchUserStatusByStudentUsername = (request, response) => {
   const { username } = request.params;
   const updateUserStatus = request.body;
@@ -49,3 +51,11 @@ exports.patchUserStatusByStudentUsername = (request, response) => {
     response.status(200).send({ student });
   });
 };
+
+exports.patchRanchByUsername = (request, response) => {
+  const { username } = request.params;
+  updateRanchByUsername(username).then((result) => {
+    response.status(200).send({ result });
+  });
+};
+

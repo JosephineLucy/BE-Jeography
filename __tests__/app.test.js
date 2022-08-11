@@ -83,49 +83,47 @@ describe("GET /student/:username", () => {
         .expect(200)
         .then(({ body }) => {
           expect(body.profile).toHaveLength(1);
-          expect(body.profile[0]).toMatchObject({
-            _id: "62f4e68fd27bf3981e8ee25e",
-            avatarId: "https://i.imgur.com/mM4LmUV.png",
-            email: "mario@gmail.com",
-            jeo_ranch: [
-              "https://i.imgur.com/oxYZ7c2.png",
-              "https://i.imgur.com/T5IjKoI.png",
-              "https://i.imgur.com/x0cwPla.png",
-              "https://i.imgur.com/mM4LmUV.png",
-            ],
-            password: "unique",
-            type: "student",
-            userStatus: 10,
-            userStatus: "I am a geography quiz whiz!",
-            username: "mario",
+          expect.objectContaining({
+            _id: expect.any(String),
+            avatarId: expect.any(String),
+            email: expect.any(String),
+            jeo_ranch: expect.any(Array),
+            password: expect.any(String),
+            type: expect.any(String),
+            userPoints: expect.any(Number),
+            userStatus: expect.any(String),
+            username: expect.any(String),
           });
         });
     });
   });
 });
 
-describe('POST /student', () => {
-  describe('POST /student', () => {
-    test('status 201: responds with a body of a posted student', () => {
+describe("POST /student", () => {
+  describe("POST /student", () => {
+    test("status 201: responds with a body of a posted student", () => {
       const studentToPost = {
-        username:'Jamie',
-        password:'letsHope123',
-        email: 'jamiete@gmail.com'
+        username: "Jamie",
+        password: "letsHope123",
+        email: "jamiete@gmail.com",
       };
 
       return request(app)
-      .post('/student')
-      .send(studentToPost)
-      .expect(201)
-      .then(({body}) => {
-        expect(body.student).toEqual({acknowledged: true, insertedId: expect.any(String)})
-      
-      });
+        .post("/student")
+        .send(studentToPost)
+        .expect(201)
+        .then(({ body }) => {
+          expect(body.student).toEqual({
+            acknowledged: true,
+            insertedId: expect.any(String),
+          });
+        });
     });
   });
 });
 
-describe.only("PATCH 10 PATCH api/students/:username/userStatus", () => {
+
+describe("PATCH api/students/:username/userStatus", () => {
   it("200: responds with the updated student object where userStatus is changed", () => {
     const username = "mario";
     const updateUserStatus = {
@@ -140,6 +138,22 @@ describe.only("PATCH 10 PATCH api/students/:username/userStatus", () => {
           acknowledged: true,
           matchedCount: 1
         }))
+      });
+  });
+});
+
+
+describe("PATCH /students/:username/ranch", () => {
+  it("200: responds with the updated student object where jeoRanch has a new badge", () => {
+    const username = "mario";
+    return request(app)
+      .patch(`/students/${username}/ranch`)
+      .send()
+      .expect(200)
+      .then(({ body }) => {
+        expect.objectContaining({
+          acknowledged: true,
+        });
       });
   });
 });

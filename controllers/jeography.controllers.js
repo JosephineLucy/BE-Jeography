@@ -1,8 +1,13 @@
-const { selectUsers, selectCountry } = require("../models/jeography.models");
+const {
+  selectStudents,
+  selectCountry,
+  insertStudent,
+} = require("../models/jeography.models");
 
-exports.getUsers = (req, res) => {
-  selectUsers().then((users) => {
-    res.status(200).send({ users });
+exports.getStudents = (req, res) => {
+  selectStudents().then((students) => {
+    res.status(200).send({ students });
+    console.log(res);
   });
 };
 
@@ -10,5 +15,12 @@ exports.getCountry = (req, res) => {
   const country = req.params.country;
   selectCountry(country).then((selectedCountry) => {
     res.status(200).send({ selectedCountry });
+  });
+};
+
+exports.postStudent = (request, response) => {
+  const newStudent = request.body;
+  insertStudent(newStudent).then((student) => {
+    response.status(201).send({ student });
   });
 };

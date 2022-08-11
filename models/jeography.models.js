@@ -1,13 +1,14 @@
 const database = require("../db/connection");
 
-exports.selectUsers = () => {
+exports.selectStudents = () => {
   return database.run().then((database) => {
     return database
       .collection("usersDB")
       .find({ type: "student" })
       .toArray()
-      .then((users) => {
-        return users;
+      .then((students) => {
+        console.log(students);
+        return students;
       });
   });
 };
@@ -20,6 +21,21 @@ exports.selectCountry = (country) => {
       .toArray()
       .then((country) => {
         return country;
+      });
+  });
+};
+
+exports.insertStudent = (newStudent) => {
+  const { type, username, password, email, avatar_id } = newStudent;
+  newStudent.userPoints = 0;
+  newStudent.jeoRanch = [];
+  newStudent.userStatus = "";
+  return database.run().then((database) => {
+    return database
+      .collection("usersDB")
+      .insertOne(newStudent)
+      .then((student) => {
+        return student;
       });
   });
 };

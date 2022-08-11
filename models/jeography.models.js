@@ -78,9 +78,9 @@ exports.selectComments = (username) => {
       .toArray()
       .then((comments) => {
         return comments;
-        })
-        })
-        }
+      });
+  });
+};
 
 exports.updateUserStatusByStudentUsername = (username, updateUserStatus) => {
   return database.run().then((database) => {
@@ -111,7 +111,17 @@ exports.updateRanchByUsername = (username) => {
       )
       .then((result) => {
         return result;
+      });
+  });
+};
 
+exports.insertComment = (newComment, username) => {
+  return database.run().then((database) => {
+    return database
+      .collection("comments")
+      .insertOne({ body: newComment, username: username, created_at: Date() })
+      .then((comment) => {
+        return comment;
       });
   });
 };

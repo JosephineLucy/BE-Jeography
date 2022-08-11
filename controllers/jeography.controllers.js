@@ -7,6 +7,7 @@ const {
   selectComments,
   updateUserStatusByStudentUsername,
   updateRanchByUsername,
+  insertComment
 } = require("../models/jeography.models");
 
 exports.getStudents = (req, res) => {
@@ -65,3 +66,11 @@ exports.patchRanchByUsername = (request, response) => {
     response.status(200).send({ result });
   });
 };
+
+exports.postComment = (req, res) => {
+  const { username } = req.params;
+  const newComment = req.body.body;
+  insertComment(newComment, username).then((comment) => {
+    res.status(201).send({ comment });
+  });
+}

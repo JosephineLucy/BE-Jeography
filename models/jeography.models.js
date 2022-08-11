@@ -78,9 +78,9 @@ exports.selectComments = (username) => {
       .toArray()
       .then((comments) => {
         return comments;
-        })
-        })
-        }
+      });
+  });
+};
 
 exports.updateUserStatusByStudentUsername = (username, updateUserStatus) => {
   return database.run().then((database) => {
@@ -111,7 +111,31 @@ exports.updateRanchByUsername = (username) => {
       )
       .then((result) => {
         return result;
+      });
+  });
+};
 
+exports.selectUserAvatars = (username) => {
+  return database.run().then((database) => {
+    return database
+      .collection("usersDB")
+      .findOne({ username: username })
+      .then((student) => {
+        return student.jeoRanch;
+      });
+  });
+};
+
+exports.updateAvatarByUsername = (username, selectedAvatar) => {
+  return database.run().then((database) => {
+    return database
+      .collection("usersDB")
+      .updateOne(
+        { username: username },
+        { $set: { avatarURL: selectedAvatar } }
+      )
+      .then((student) => {
+        return student;
       });
   });
 };

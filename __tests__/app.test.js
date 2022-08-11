@@ -31,3 +31,23 @@ describe("/:country", () => {
     });
   });
 });
+
+describe("/students/:username/userPoints", () => {
+  it("200: responds with the updated student object where userPoints are incremented by 1", () => {
+    const username = "mario";
+    const userPointsUpdate = {
+      userPoints: 1,
+    };
+    return request(app)
+      .patch(`/students/${username}/userPoints`)
+      .send(userPointsUpdate)
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.student).toEqual(
+          expect.objectContaining({
+            acknowledged: true,
+          })
+        );
+      });
+  });
+});

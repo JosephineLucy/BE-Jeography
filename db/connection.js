@@ -1,5 +1,14 @@
 const { MongoClient } = require("mongodb");
-const connectionString = "mongodb+srv://jeography:fn6ma8997ATcWLIa@cluster0.nrslrce.mongodb.net/test";
+const ENV = process.env.NODE_ENV || "development"
+require("dotenv").config({path: `${__dirname}/../.env.${ENV}`})
+
+if (!process.env.ATLAS_URI) {
+  throw new Error ("MONGODB not set")
+}
+
+const connectionString = process.env.ATLAS_URI;
+const database = process.env.DB_NAME
+
 const client = new MongoClient(connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -11,7 +20,7 @@ const connectToServer = function (callback) {
         return callback(err);
       }
 
-      dbConnection = db.db("jeography_test");
+      dbConnection = db.db(database);
       console.log("Successfully connected to MongoDB.");
 
       return callback();
@@ -21,7 +30,7 @@ const connectToServer = function (callback) {
 const run = async () => {
     try {
         await client.connect();
-        const db  = client.db("jeography_test");
+        const db  = client.db(database);
         return db;
     } catch (err) {
         console.log("issue connecting")

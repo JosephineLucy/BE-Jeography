@@ -11,3 +11,15 @@ exports.selectUsers = () => {
       });
   });
 };
+
+exports.selectCountry = (country) => {
+  return database.run().then((database) => {
+    return database
+      .collection(country)
+      .find({})
+      .toArray()
+      .then((country) => {
+        return country;
+      });
+  });
+};

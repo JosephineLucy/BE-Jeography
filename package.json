@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "seed": "node ./db/seeds/run-seed.js",
-    "start": "nodemon app.js"
+    "start": "nodemon listen.js"
   },
   "repository": {
     "type": "git",

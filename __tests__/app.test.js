@@ -13,7 +13,6 @@ describe("/students", () => {
         .get("/students")
         .expect(200)
         .then(({ body }) => {
-
           body.students.forEach((student) => {
             expect.objectContaining({
               _id: expect.any(String),
@@ -39,7 +38,16 @@ describe("/:country", () => {
         .get("/englandDB")
         .expect(200)
         .then(({ body }) => {
-
+          expect(body.selectedCountry).toHaveLength(5);
+          body.selectedCountry.forEach((question) => {
+            expect.objectContaining({
+              _id: expect.any(String),
+              country: expect.any(String),
+              question: expect.any(String),
+              correct_answer: expect.any(String),
+              incorrect_answers: expect.any(Array),
+            });
+          });
         });
     });
   });
@@ -68,16 +76,6 @@ describe("/student/:username", () => {
             userPoints: 10,
             userStatus: "I am a geography quiz whiz!",
             username: "mario",
-          expect(body.selectedCountry).toHaveLength(5);
-          body.selectedCountry.forEach((question) => {
-            expect.objectContaining({
-              _id: expect.any(String),
-              country: expect.any(String),
-              question: expect.any(String),
-              correct_answer: expect.any(String),
-              incorrect_answers: expect.any(Array),
-            });
-
           });
         });
     });

@@ -77,8 +77,41 @@ exports.selectComments = (username) => {
       .find({ username: username })
       .toArray()
       .then((comments) => {
-        console.log(comments, "<<<<<commments");
         return comments;
+        })
+        })
+        }
+
+exports.updateUserStatusByStudentUsername = (username, updateUserStatus) => {
+  return database.run().then((database) => {
+    return database
+      .collection("usersDB")
+      .updateOne({ username: username }, { $set: updateUserStatus })
+      .then((student) => {
+        return student;
+      });
+  });
+};
+
+exports.updateRanchByUsername = (username) => {
+  const badges = [
+    "https://i.imgur.com/x0cwPla.png",
+    "https://i.imgur.com/EmMa4Gz.png",
+    "https://i.imgur.com/yxlSmoL.png",
+    "https://i.imgur.com/mM4LmUV.png",
+    "https://i.imgur.com/J1q0Gue.png",
+  ];
+  let rewardNum = Math.floor(Math.random() * badges.length);
+  return database.run().then((database) => {
+    return database
+      .collection("usersDB")
+      .updateOne(
+        { username: username },
+        { $push: { jeoRanch: badges[rewardNum] } }
+      )
+      .then((result) => {
+        return result;
+
       });
   });
 };

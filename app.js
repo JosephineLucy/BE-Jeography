@@ -6,6 +6,8 @@ const {
   patchUserPointsByStudentUsername,
   getProfile,
   getComments,
+  patchUserStatusByStudentUsername,
+  patchRanchByUsername,
 } = require("./controllers/jeography.controllers");
 const cors = require("cors");
 const dbo = require("./db/connection");
@@ -17,10 +19,14 @@ app.use(express.json());
 
 app.get("/students", getStudents);
 app.get("/student/:username", getProfile);
-
 app.get("/:country", getCountry);
+
 app.post("/student", postStudent);
+
 app.patch("/students/:username/userPoints", patchUserPointsByStudentUsername);
+app.patch("/students/:username/userStatus", patchUserStatusByStudentUsername);
+app.patch("/students/:username/ranch", patchRanchByUsername);
+
 
 app.get("/comments/:username", getComments);
 

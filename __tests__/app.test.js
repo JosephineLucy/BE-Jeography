@@ -119,3 +119,18 @@ describe("POST /student", () => {
     });
   });
 });
+
+describe.only("PATCH /students/:username/ranch", () => {
+  it("200: responds with the updated student object where jeoRanch has a new badge", () => {
+    const username = "mario";
+    return request(app)
+      .patch(`/students/${username}/ranch`)
+      .send()
+      .expect(200)
+      .then(({ body }) => {
+        expect.objectContaining({
+          acknowledged: true,
+        });
+      });
+  });
+});

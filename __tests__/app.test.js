@@ -132,6 +132,8 @@ describe("GET /comments/:username", () => {
           });
         });
     });
+  });
+});
 
 describe("PATCH api/students/:username/userStatus", () => {
   it("200: responds with the updated student object where userStatus is changed", () => {
@@ -164,6 +166,5 @@ describe("PATCH /students/:username/ranch", () => {
           acknowledged: true,
         });
       });
-
   });
 });

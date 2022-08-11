@@ -17,6 +17,7 @@ exports.selectCountry = (country) => {
     return database
       .collection(country)
       .find({})
+      .limit(5)
       .toArray()
       .then((country) => {
         return country;
@@ -41,6 +42,7 @@ exports.insertStudent = (newStudent) => {
   });
 };
 
+
 exports.selectProfile = (username) => {
   return database.run().then((database) => {
     return database
@@ -52,3 +54,4 @@ exports.selectProfile = (username) => {
       });
   });
 };
+

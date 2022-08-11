@@ -45,7 +45,6 @@ exports.insertStudent = (newStudent) => {
   });
 };
 
-
 exports.updateUserPointsByStudentUsername = (username, updatedPoints) => {
   const { userPoints } = updatedPoints;
   return database.run().then((database) => {
@@ -59,7 +58,6 @@ exports.updateUserPointsByStudentUsername = (username, updatedPoints) => {
   });
 };
 
-
 exports.selectProfile = (username) => {
   return database.run().then((database) => {
     return database
@@ -72,3 +70,14 @@ exports.selectProfile = (username) => {
   });
 };
 
+exports.updateRanchByUsername = (username) => {
+  return database.run().then((database) => {
+    return database
+      .collection("randomBadges")
+      .find({})
+      .toArray()
+      .then((badges) => {
+        console.log(badges);
+      });
+  });
+};

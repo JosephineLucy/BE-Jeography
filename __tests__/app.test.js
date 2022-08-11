@@ -31,3 +31,24 @@ describe("/:country", () => {
     });
   });
 });
+
+describe('/student', () => {
+  describe('POST /student', () => {
+    test('status 201: responds with a body of a posted student', () => {
+      const studentToPost = {
+        username:'Jamie',
+        password:'letsHope123',
+        email: 'jamiete@gmail.com'
+      };
+
+      return request(app)
+      .post('/student')
+      .send(studentToPost)
+      .expect(201)
+      .then(({body}) => {
+        expect(body.student).toEqual({acknowledged: true, insertedId: expect.any(String)})
+      
+      });
+    });
+  });
+});

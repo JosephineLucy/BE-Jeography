@@ -77,7 +77,7 @@ exports.selectComments = (username) => {
       .find({ username: username })
       .toArray()
       .then((comments) => {
-        console.log(comments);
+        console.log(comments, "<<<<<commments");
         return comments;
       });
   });

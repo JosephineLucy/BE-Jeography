@@ -13,7 +13,19 @@ describe("/students", () => {
         .get("/students")
         .expect(200)
         .then(({ body }) => {
-          console.log(body);
+          body.students.forEach((student) => {
+            expect.objectContaining({
+              _id: expect.any(String),
+              type: expect.any(String),
+              avatar_id: expect.any(String),
+              username: expect.any(String),
+              password: expect.any(String),
+              email: expect.any(String),
+              userPoints: expect.any(Number),
+              jeoRanch: expect.any(Array),
+              userStatus: expect.any(String),
+            });
+          });
         });
     });
   });
@@ -26,7 +38,16 @@ describe("/:country", () => {
         .get("/englandDB")
         .expect(200)
         .then(({ body }) => {
-          console.log(body);
+          expect(body.selectedCountry).toHaveLength(5);
+          body.selectedCountry.forEach((question) => {
+            expect.objectContaining({
+              _id: expect.any(String),
+              country: expect.any(String),
+              question: expect.any(String),
+              correct_answer: expect.any(String),
+              incorrect_answers: expect.any(Array),
+            });
+          });
         });
     });
   });

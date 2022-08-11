@@ -18,6 +18,7 @@ exports.selectCountry = (country) => {
     return database
       .collection(country)
       .find({})
+      .limit(5)
       .toArray()
       .then((country) => {
         return country;
@@ -41,4 +42,3 @@ exports.insertStudent = (newStudent) => {
       });
   });
 };
-

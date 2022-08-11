@@ -53,7 +53,27 @@ describe("/:country", () => {
   });
 });
 
-describe("/student/:username", () => {
+describe("PATCH /students/:username/userPoints", () => {
+  it("200: responds with the updated student object where userPoints are incremented by 1", () => {
+    const username = "mario";
+    const userPointsUpdate = {
+      userPoints: 1,
+    };
+    return request(app)
+      .patch(`/students/${username}/userPoints`)
+      .send(userPointsUpdate)
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.student).toEqual(
+          expect.objectContaining({
+            acknowledged: true,
+          })
+        );
+      });
+  });
+});
+
+describe("GET /student/:username", () => {
   describe("GET /student/:username", () => {
     test("status 200: returns with an object of specified users info", () => {
       return request(app)
@@ -82,7 +102,7 @@ describe("/student/:username", () => {
   });
 });
 
-describe('/student', () => {
+describe('POST /student', () => {
   describe('POST /student', () => {
     test('status 201: responds with a body of a posted student', () => {
       const studentToPost = {

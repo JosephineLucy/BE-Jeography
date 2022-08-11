@@ -2,6 +2,7 @@ const {
   selectStudents,
   selectCountry,
   insertStudent,
+  updateUserPointsByStudentUsername,
   selectProfile,
 } = require("../models/jeography.models");
 
@@ -24,6 +25,12 @@ exports.postStudent = (request, response) => {
     response.status(201).send({ student });
   });
 };
+
+exports.patchUserPointsByStudentUsername = (request, response) => {
+  const { username } = request.params;
+  const updatedPoints = request.body;
+  updateUserPointsByStudentUsername(username, updatedPoints).then((student) => {
+    response.status(200).send({ student });
 
 exports.getProfile = (request, response) => {
   const username = request.params.username;

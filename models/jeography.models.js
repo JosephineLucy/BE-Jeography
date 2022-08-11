@@ -29,13 +29,30 @@ exports.insertStudent = (newStudent) => {
   const { username, password, email } = newStudent;
   newStudent.type = "student";
   newStudent.userPoints = 0;
-  newStudent.avatar_id = [""];
-  newStudent.jeoRanch = ["https://i.imgur.com/mM4LmUV.png"];
+  newStudent.avatarURL = ["https://i.imgur.com/T5IjKoI.png"];
+  newStudent.jeoRanch = [
+    "https://i.imgur.com/oxYZ7c2.png",
+    "https://i.imgur.com/T5IjKoI.png",
+  ];
   newStudent.userStatus = "Learning geography with jeography!";
   return database.run().then((database) => {
     return database
       .collection("usersDB")
       .insertOne(newStudent)
+      .then((student) => {
+        return student;
+      });
+  });
+};
+
+
+exports.updateUserPointsByStudentUsername = (username, updatedPoints) => {
+  const { userPoints } = updatedPoints;
+  return database.run().then((database) => {
+    return database
+      .collection("usersDB")
+      .updateOne({ username: username }, { $inc: { userPoints: userPoints } })
+
       .then((student) => {
         return student;
       });

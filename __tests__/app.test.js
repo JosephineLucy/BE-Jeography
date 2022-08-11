@@ -120,6 +120,19 @@ describe("POST /student", () => {
   });
 });
 
+describe("GET /comments/:username", () => {
+  describe("GET /comments/:username", () => {
+    test("status 200: returns with an object containing the user's comments", () => {
+      return request(app)
+        .get("/comments/mario")
+        .expect(200)
+        .then((comments) => {
+          expect.objectContaining({
+            username: "mario",
+          });
+        });
+    });
+
 describe("PATCH api/students/:username/userStatus", () => {
   it("200: responds with the updated student object where userStatus is changed", () => {
     const username = "mario";
@@ -151,5 +164,6 @@ describe("PATCH /students/:username/ranch", () => {
           acknowledged: true,
         });
       });
+
   });
 });

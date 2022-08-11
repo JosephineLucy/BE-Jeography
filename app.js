@@ -5,6 +5,7 @@ const {
   postStudent,
   patchUserPointsByStudentUsername,
   getProfile,
+  getComments,
   patchUserStatusByStudentUsername,
   patchRanchByUsername,
 } = require("./controllers/jeography.controllers");
@@ -26,6 +27,8 @@ app.patch("/students/:username/userPoints", patchUserPointsByStudentUsername);
 app.patch("/students/:username/userStatus", patchUserStatusByStudentUsername);
 app.patch("/students/:username/ranch", patchRanchByUsername);
 
+
+app.get("/comments/:username", getComments);
 
 dbo.connectToServer(function (err) {
   if (err) {

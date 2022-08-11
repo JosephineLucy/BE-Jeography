@@ -70,6 +70,18 @@ exports.selectProfile = (username) => {
   });
 };
 
+exports.selectComments = (username) => {
+  return database.run().then((database) => {
+    return database
+      .collection("comments")
+      .find({ username: username })
+      .toArray()
+      .then((comments) => {
+        return comments;
+        })
+        })
+        }
+
 exports.updateUserStatusByStudentUsername = (username, updateUserStatus) => {
   return database.run().then((database) => {
     return database
@@ -99,6 +111,7 @@ exports.updateRanchByUsername = (username) => {
       )
       .then((result) => {
         return result;
+
       });
   });
 };

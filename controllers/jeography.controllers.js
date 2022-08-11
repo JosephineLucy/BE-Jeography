@@ -4,6 +4,7 @@ const {
   insertStudent,
   updateUserPointsByStudentUsername,
   selectProfile,
+  selectComments,
   updateUserStatusByStudentUsername,
   updateRanchByUsername,
 } = require("../models/jeography.models");
@@ -43,6 +44,12 @@ exports.getProfile = (request, response) => {
   });
 };
 
+exports.getComments = (request, response) => {
+  const username = request.params.username;
+  selectComments(username).then((comments) => {
+    response.status(200).send({ comments });
+  });
+};
 
 exports.patchUserStatusByStudentUsername = (request, response) => {
   const { username } = request.params;
@@ -58,4 +65,3 @@ exports.patchRanchByUsername = (request, response) => {
     response.status(200).send({ result });
   });
 };
-

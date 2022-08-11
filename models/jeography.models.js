@@ -59,7 +59,6 @@ exports.updateUserPointsByStudentUsername = (username, updatedPoints) => {
   });
 };
 
-
 exports.selectProfile = (username) => {
   return database.run().then((database) => {
     return database
@@ -72,3 +71,13 @@ exports.selectProfile = (username) => {
   });
 };
 
+exports.updateUserStatusByStudentUsername = (username, updateUserStatus) => {
+  return database.run().then((database) => {
+    return database
+      .collection("usersDB")
+      .updateOne({ username: username }, { $set: updateUserStatus })
+      .then((student) => {
+        return student;
+      });
+  });
+};

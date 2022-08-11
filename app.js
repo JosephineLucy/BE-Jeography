@@ -4,7 +4,8 @@ const {
   getCountry,
   postStudent,
   patchUserPointsByStudentUsername,
-   getProfile,
+  getProfile,
+  patchUserStatusByStudentUsername,
 } = require("./controllers/jeography.controllers");
 const cors = require("cors");
 const dbo = require("./db/connection");
@@ -20,6 +21,7 @@ app.get("/student/:username", getProfile);
 app.get("/:country", getCountry);
 app.post("/student", postStudent);
 app.patch("/students/:username/userPoints", patchUserPointsByStudentUsername);
+app.patch("/students/:username/userStatus", patchUserStatusByStudentUsername);
 
 dbo.connectToServer(function (err) {
   if (err) {

@@ -21,7 +21,7 @@ describe("/students", () => {
               username: expect.any(String),
               password: expect.any(String),
               email: expect.any(String),
-              userPoints: expect.any(Number),
+              userStatus: expect.any(Number),
               jeoRanch: expect.any(Array),
               userStatus: expect.any(String),
             });
@@ -53,15 +53,17 @@ describe("/:country", () => {
   });
 });
 
-describe("PATCH /students/:username/userPoints", () => {
-  it("200: responds with the updated student object where userPoints are incremented by 1", () => {
+describe("PATCH /students/:username/userStatus", () => {
+  it("200: responds with the updated student object where userStatus are incremented by 1", () => {
     const username = "mario";
-    const userPointsUpdate = {
-      userPoints: 1,
+    const userStatus
+ = {
+      userStatus: 1,
     };
     return request(app)
-      .patch(`/students/${username}/userPoints`)
-      .send(userPointsUpdate)
+      .patch(`/students/${username}/userStatus`)
+      .send(userStatus
+)
       .expect(200)
       .then(({ body }) => {
         expect(body.student).toEqual(
@@ -93,7 +95,7 @@ describe("GET /student/:username", () => {
             ],
             password: "unique",
             type: "student",
-            userPoints: 10,
+            userStatus: 10,
             userStatus: "I am a geography quiz whiz!",
             username: "mario",
           });
@@ -122,3 +124,23 @@ describe('POST /student', () => {
     });
   });
 });
+
+describe.only("PATCH 10 PATCH api/students/:username/userStatus", () => {
+  it("200: responds with the updated student object where userStatus is changed", () => {
+    const username = "mario";
+    const updateUserStatus = {
+      userStatus: "I like all my collected avatars",
+    };
+    return request(app)
+      .patch(`/students/${username}/userStatus`)
+      .send(updateUserStatus)
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.student).toEqual(expect.objectContaining({
+          acknowledged: true,
+          matchedCount: 1
+        }))
+      });
+  });
+});
+

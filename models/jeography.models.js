@@ -7,7 +7,6 @@ exports.selectStudents = () => {
       .find({ type: "student" })
       .toArray()
       .then((students) => {
-        console.log(students);
         return students;
       });
   });
@@ -42,3 +41,17 @@ exports.insertStudent = (newStudent) => {
       });
   });
 };
+
+
+exports.selectProfile = (username) => {
+  return database.run().then((database) => {
+    return database
+      .collection("usersDB")
+      .find({ username: username })
+      .toArray()
+      .then((profile) => {
+        return profile;
+      });
+  });
+};
+

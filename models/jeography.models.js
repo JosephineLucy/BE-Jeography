@@ -70,7 +70,6 @@ exports.selectProfile = (username) => {
   });
 };
 
-
 exports.updateUserStatusByStudentUsername = (username, updateUserStatus) => {
   return database.run().then((database) => {
     return database
@@ -78,7 +77,9 @@ exports.updateUserStatusByStudentUsername = (username, updateUserStatus) => {
       .updateOne({ username: username }, { $set: updateUserStatus })
       .then((student) => {
         return student;
-        });
+      });
+  });
+};
 
 exports.updateRanchByUsername = (username) => {
   const badges = [
@@ -99,4 +100,5 @@ exports.updateRanchByUsername = (username) => {
       .then((result) => {
         return result;
       });
+  });
 };

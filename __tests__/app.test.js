@@ -56,14 +56,12 @@ describe("/:country", () => {
 describe("PATCH /students/:username/userStatus", () => {
   it("200: responds with the updated student object where userStatus are incremented by 1", () => {
     const username = "mario";
-    const userStatus
- = {
+    const userStatus = {
       userStatus: 1,
     };
     return request(app)
       .patch(`/students/${username}/userStatus`)
-      .send(userStatus
-)
+      .send(userStatus)
       .expect(200)
       .then(({ body }) => {
         expect(body.student).toEqual(
@@ -122,7 +120,6 @@ describe("POST /student", () => {
   });
 });
 
-
 describe("PATCH api/students/:username/userStatus", () => {
   it("200: responds with the updated student object where userStatus is changed", () => {
     const username = "mario";
@@ -134,14 +131,13 @@ describe("PATCH api/students/:username/userStatus", () => {
       .send(updateUserStatus)
       .expect(200)
       .then(({ body }) => {
-        expect(body.student).toEqual(expect.objectContaining({
+        expect.objectContaining({
           acknowledged: true,
-          matchedCount: 1
-        }))
+          matchedCount: 1,
+        });
       });
   });
 });
-
 
 describe("PATCH /students/:username/ranch", () => {
   it("200: responds with the updated student object where jeoRanch has a new badge", () => {
@@ -157,4 +153,3 @@ describe("PATCH /students/:username/ranch", () => {
       });
   });
 });
-

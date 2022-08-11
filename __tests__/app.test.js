@@ -19,15 +19,15 @@ describe("/students", () => {
   });
 });
 
-// describe("/:country", () => {
-//   describe("GET /:country", () => {
-//     test("status 200: returns an array of the questions for a specific country", () => {
-//       return request(app)
-//         .get("/englandDB")
-//         .expect(200)
-//         .then(({ body }) => {
-//           console.log(body);
-//         });
-//     });
-//   });
-// });
+describe("/:country", () => {
+  describe("GET /:country", () => {
+    test("status 200: returns an array of the questions for a specific country", () => {
+      return request(app)
+        .get("/englandDB")
+        .expect(200)
+        .then(({ body }) => {
+          console.log(body);
+        });
+    });
+  });
+});

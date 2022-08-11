@@ -26,10 +26,12 @@ exports.selectCountry = (country) => {
 };
 
 exports.insertStudent = (newStudent) => {
-  const { type, username, password, email, avatar_id } = newStudent;
+  const { username, password, email } = newStudent;
+  newStudent.type = "student";
   newStudent.userPoints = 0;
-  newStudent.jeoRanch = [];
-  newStudent.userStatus = "";
+  newStudent.avatar_id = [""];
+  newStudent.jeoRanch = ["https://i.imgur.com/mM4LmUV.png"];
+  newStudent.userStatus = "Learning geography with jeography!";
   return database.run().then((database) => {
     return database
       .collection("usersDB")
@@ -39,3 +41,4 @@ exports.insertStudent = (newStudent) => {
       });
   });
 };
+

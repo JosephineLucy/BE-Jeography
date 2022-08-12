@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --watch --detectOpenHandles",
     "seed": "node ./db/seeds/run-seed.js",
-    "start": "nodemon listen.js"
+    "start": "node listen.js"
   },
   "repository": {
     "type": "git",

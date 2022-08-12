@@ -8,7 +8,7 @@ const {
   updateUserStatusByStudentUsername,
   updateRanchByUsername,
   updateAvatarByUsername,
-  selectUserAvatars,
+  insertComment
 } = require("../models/jeography.models");
 
 exports.getStudents = (req, res) => {
@@ -75,9 +75,16 @@ exports.patchAvatarByUsername = async (request, response) => {
     const { username } = request.params;
     const selectedAvatar = request.body.avatarURL;
     const student = await updateAvatarByUsername(username, selectedAvatar);
-
     response.status(200).send({ student });
   } catch (err) {
     console.log(err);
   }
 };
+
+exports.postComment = (req, res) => {
+  const { username } = req.params;
+  const newComment = req.body.body;
+  insertComment(newComment, username).then((comment) => {
+    res.status(201).send({ comment });
+  });
+}

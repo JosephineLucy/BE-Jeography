@@ -9,6 +9,7 @@ const {
   patchUserStatusByStudentUsername,
   patchRanchByUsername,
   patchAvatarByUsername,
+  postComment,
 } = require("./controllers/jeography.controllers");
 const cors = require("cors");
 const dbo = require("./db/connection");
@@ -23,10 +24,12 @@ app.get("/student/:username", getProfile);
 app.get("/:country", getCountry);
 
 app.post("/student", postStudent);
+app.post("/comments/:username", postComment);
 
 app.patch("/students/:username/userPoints", patchUserPointsByStudentUsername);
 app.patch("/students/:username/userStatus", patchUserStatusByStudentUsername);
 app.patch("/students/:username/ranch", patchRanchByUsername);
+
 app.patch("/students/:username/avatar", patchAvatarByUsername);
 
 app.get("/comments/:username", getComments);

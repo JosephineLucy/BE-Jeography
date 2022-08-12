@@ -169,7 +169,7 @@ describe("PATCH /students/:username/ranch", () => {
   });
 });
 
-describe.only("PATCH /students/:username/avatar", () => {
+describe("PATCH /students/:username/avatar", () => {
   it("200: responds with the updated student object where avatar has been changed", () => {
     const username = "mario";
 
@@ -187,3 +187,24 @@ describe.only("PATCH /students/:username/avatar", () => {
       });
   });
 });
+
+describe("POST /comments/:username", () => {
+  describe("POST /comments/:username", () => {
+    test("status 201: responds with a body of a posted comment", () => {
+      const commentToPost = {
+        body: "Well Done Mario!"
+      };
+      return request(app)
+        .post("/comments/mario")
+        .send(commentToPost)
+        .expect(201)
+        .then(({ body }) => {
+          expect(body.comment).toEqual({
+            acknowledged: true,
+            insertedId: expect.any(String),
+          });
+        });
+    });
+  });
+});
+

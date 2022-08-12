@@ -115,17 +115,6 @@ exports.updateRanchByUsername = (username) => {
   });
 };
 
-exports.selectUserAvatars = (username) => {
-  return database.run().then((database) => {
-    return database
-      .collection("usersDB")
-      .findOne({ username: username })
-      .then((student) => {
-        return student.jeoRanch;
-      });
-  });
-};
-
 exports.updateAvatarByUsername = (username, selectedAvatar) => {
   return database.run().then((database) => {
     return database
@@ -136,6 +125,15 @@ exports.updateAvatarByUsername = (username, selectedAvatar) => {
       )
       .then((student) => {
         return student;
+
+
+exports.insertComment = (newComment, username) => {
+  return database.run().then((database) => {
+    return database
+      .collection("comments")
+      .insertOne({ body: newComment, username: username, created_at: Date() })
+      .then((comment) => {
+        return comment;
       });
   });
 };

@@ -125,6 +125,9 @@ exports.updateAvatarByUsername = (username, selectedAvatar) => {
       )
       .then((student) => {
         return student;
+      });
+    });
+  };
 
 
 exports.insertComment = (newComment, username) => {

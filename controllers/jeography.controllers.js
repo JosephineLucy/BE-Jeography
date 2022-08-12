@@ -59,8 +59,7 @@ exports.patchUserStatusByStudentUsername = (request, response) => {
   updateUserStatusByStudentUsername(username, updateUserStatus).then(
     (student) => {
       response.status(200).send({ student });
-    }
-  );
+  });
 };
 
 exports.patchRanchByUsername = (request, response) => {

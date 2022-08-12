@@ -115,6 +115,18 @@ exports.updateRanchByUsername = (username) => {
   });
 };
 
+exports.updateAvatarByUsername = (username, selectedAvatar) => {
+  return database.run().then((database) => {
+    return database
+      .collection("usersDB")
+      .updateOne(
+        { username: username },
+        { $set: { avatarURL: selectedAvatar } }
+      )
+      .then((student) => {
+        return student;
+
+
 exports.insertComment = (newComment, username) => {
   return database.run().then((database) => {
     return database

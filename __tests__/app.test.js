@@ -169,6 +169,25 @@ describe("PATCH /students/:username/ranch", () => {
   });
 });
 
+describe("PATCH /students/:username/avatar", () => {
+  it("200: responds with the updated student object where avatar has been changed", () => {
+    const username = "mario";
+
+    const updateUserAvatar = {
+      avatarURL: "https://i.imgur.com/yxlSmoL.png",
+    };
+    return request(app)
+      .patch(`/students/${username}/avatar`)
+      .send(updateUserAvatar)
+      .expect(200)
+      .then(({ body }) => {
+        expect.objectContaining({
+          acknowledged: true,
+        });
+      });
+  });
+});
+
 describe("POST /comments/:username", () => {
   describe("POST /comments/:username", () => {
     test("status 201: responds with a body of a posted comment", () => {
@@ -188,3 +207,4 @@ describe("POST /comments/:username", () => {
     });
   });
 });
+

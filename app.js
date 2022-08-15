@@ -7,6 +7,7 @@ const {
   getProfile,
   patchUserStatusByStudentUsername,
   patchRanchByUsername,
+  patchUserObj,
 } = require("./controllers/jeography.controllers");
 const cors = require("cors");
 const dbo = require("./db/connection");
@@ -25,7 +26,7 @@ app.post("/student", postStudent);
 app.patch("/students/:username/userPoints", patchUserPointsByStudentUsername);
 app.patch("/students/:username/userStatus", patchUserStatusByStudentUsername);
 app.patch("/students/:username/ranch", patchRanchByUsername);
-
+app.patch("/student/:username/profile", patchUserObj);
 
 dbo.connectToServer(function (err) {
   if (err) {

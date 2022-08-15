@@ -12,6 +12,19 @@ exports.selectStudents = () => {
   });
 };
 
+exports.selectBadges = () => {
+  return database.run().then((database) => {
+    return database
+      .collection("randomBadges")
+      .find({})
+      .toArray()
+      .then((badges) => {
+        console.log(badges, "<<<badges models");
+        return badges;
+      });
+  });
+};
+
 exports.selectCountry = (country) => {
   return database.run().then((database) => {
     return database
@@ -126,9 +139,8 @@ exports.updateAvatarByUsername = (username, selectedAvatar) => {
       .then((student) => {
         return student;
       });
-    });
-  };
-
+  });
+};
 
 exports.insertComment = (newComment, username) => {
   return database.run().then((database) => {

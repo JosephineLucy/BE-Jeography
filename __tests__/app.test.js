@@ -192,7 +192,7 @@ describe("POST /comments/:username", () => {
   describe("POST /comments/:username", () => {
     test("status 201: responds with a body of a posted comment", () => {
       const commentToPost = {
-        body: "Well Done Mario!"
+        body: "Well Done Mario!",
       };
       return request(app)
         .post("/comments/mario")
@@ -208,3 +208,23 @@ describe("POST /comments/:username", () => {
   });
 });
 
+describe.only("/jeoBadges", () => {
+  describe("GET /jeoBadges", () => {
+    test("status 200: returns an array of jeo-badges", () => {
+      return request(app)
+        .get("/jeoBadges")
+        .expect(200)
+        .then(({ body }) => {
+          body.badges.forEach((badge) => {
+            expect.objectContaining({
+              _id: expect.any(String),
+              animal_id: expect.any(Number),
+              country: expect.any(String),
+              animal: expect.any(String),
+              img_url: expect.any(String),
+            });
+          });
+        });
+    });
+  });
+});

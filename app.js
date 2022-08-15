@@ -6,6 +6,7 @@ const {
   patchUserPointsByStudentUsername,
   getProfile,
   getComments,
+  getBadges,
   patchUserStatusByStudentUsername,
   patchRanchByUsername,
   patchAvatarByUsername,
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/students", getStudents);
+app.get("/jeoBadges", getBadges);
 app.get("/student/:username", getProfile);
 app.get("/:country", getCountry);
 

@@ -5,15 +5,23 @@ const {
   updateUserPointsByStudentUsername,
   selectProfile,
   selectComments,
+  selectBadges,
   updateUserStatusByStudentUsername,
   updateRanchByUsername,
   updateAvatarByUsername,
-  insertComment
+  insertComment,
 } = require("../models/jeography.models");
 
 exports.getStudents = (req, res) => {
   selectStudents().then((students) => {
     res.status(200).send({ students });
+  });
+};
+
+exports.getBadges = (req, res) => {
+  selectBadges().then((badges) => {
+    console.log(badges, "<<<badges controllers");
+    res.status(200).send({ badges });
   });
 };
 
@@ -59,7 +67,8 @@ exports.patchUserStatusByStudentUsername = (request, response) => {
   updateUserStatusByStudentUsername(username, updateUserStatus).then(
     (student) => {
       response.status(200).send({ student });
-  });
+    }
+  );
 };
 
 exports.patchRanchByUsername = (request, response) => {
@@ -86,4 +95,4 @@ exports.postComment = (req, res) => {
   insertComment(newComment, username).then((comment) => {
     res.status(201).send({ comment });
   });
-}
+};

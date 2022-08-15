@@ -19,8 +19,19 @@ exports.selectBadges = () => {
       .find({})
       .toArray()
       .then((badges) => {
-        console.log(badges, "<<<badges models");
         return badges;
+      });
+  });
+};
+
+exports.selectBadge = (country) => {
+  return database.run().then((database) => {
+    return database
+      .collection("ukiBadges")
+      .find({ country: country })
+      .toArray()
+      .then((badge) => {
+        return badge;
       });
   });
 };

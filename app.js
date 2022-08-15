@@ -7,6 +7,7 @@ const {
   getProfile,
   getComments,
   getBadges,
+  getBadgeByCountry,
   patchUserStatusByStudentUsername,
   patchRanchByUsername,
   patchAvatarByUsername,
@@ -22,6 +23,7 @@ app.use(express.json());
 
 app.get("/students", getStudents);
 app.get("/jeoBadges", getBadges);
+app.get("/jeoBadges/:country", getBadgeByCountry);
 app.get("/student/:username", getProfile);
 app.get("/:country", getCountry);
 

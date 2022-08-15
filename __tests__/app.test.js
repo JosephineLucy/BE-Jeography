@@ -208,7 +208,7 @@ describe("POST /comments/:username", () => {
   });
 });
 
-describe.only("/jeoBadges", () => {
+describe("/jeoBadges", () => {
   describe("GET /jeoBadges", () => {
     test("status 200: returns an array of jeo-badges", () => {
       return request(app)
@@ -223,6 +223,25 @@ describe.only("/jeoBadges", () => {
               animal: expect.any(String),
               img_url: expect.any(String),
             });
+          });
+        });
+    });
+  });
+});
+
+describe.only("/jeoBadges/:country", () => {
+  describe("GET /jeoBadges/:country", () => {
+    test("status 200: returns an array of one jeo-badge", () => {
+      return request(app)
+        .get("/jeoBadges/England")
+        .expect(200)
+        .then(({ body }) => {
+          expect.objectContaining({
+            _id: expect.any(String),
+            animal_id: expect.any(Number),
+            country: expect.any(String),
+            animal: expect.any(String),
+            img_url: expect.any(String),
           });
         });
     });

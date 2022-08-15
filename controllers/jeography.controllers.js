@@ -6,6 +6,7 @@ const {
   selectProfile,
   selectComments,
   selectBadges,
+  selectBadge,
   updateUserStatusByStudentUsername,
   updateRanchByUsername,
   updateAvatarByUsername,
@@ -20,8 +21,14 @@ exports.getStudents = (req, res) => {
 
 exports.getBadges = (req, res) => {
   selectBadges().then((badges) => {
-    console.log(badges, "<<<badges controllers");
     res.status(200).send({ badges });
+  });
+};
+
+exports.getBadgeByCountry = (req, res) => {
+  const country = req.params.country;
+  selectBadge(country).then((badge) => {
+    res.status(200).send({ badge });
   });
 };
 

@@ -169,6 +169,22 @@ describe("PATCH /students/:username/ranch", () => {
   });
 });
 
+
+describe("PATCH /student/:username/profile", () => {
+  it("200: responds with the updated userObj", () => {
+    const username = "Jamie1";
+    return request(app)
+      .patch(`/student/${username}/profile`)
+      .send()
+      .expect(200)
+      .then(({ body }) => {
+        expect.objectContaining({
+          acknowledged: true,
+        });
+      });
+  });
+});
+
 describe("PATCH /students/:username/avatar", () => {
   it("200: responds with the updated student object where avatar has been changed", () => {
     const username = "mario";
@@ -187,6 +203,7 @@ describe("PATCH /students/:username/avatar", () => {
       });
   });
 });
+
 
 describe("POST /comments/:username", () => {
   describe("POST /comments/:username", () => {
@@ -247,3 +264,4 @@ describe.only("/jeoBadges/:country", () => {
     });
   });
 });
+

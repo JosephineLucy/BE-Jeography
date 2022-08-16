@@ -120,6 +120,21 @@ describe("POST /student", () => {
   });
 });
 
+describe("GET /comments/:username", () => {
+  describe("GET /comments/:username", () => {
+    test("status 200: returns with an object containing the user's comments", () => {
+      return request(app)
+        .get("/comments/mario")
+        .expect(200)
+        .then((comments) => {
+          expect.objectContaining({
+            username: "mario",
+          });
+        });
+    });
+  });
+});
+
 describe("PATCH api/students/:username/userStatus", () => {
   it("200: responds with the updated student object where userStatus is changed", () => {
     const username = "mario";
@@ -154,6 +169,7 @@ describe("PATCH /students/:username/ranch", () => {
   });
 });
 
+
 describe("PATCH /student/:username/profile", () => {
   it("200: responds with the updated userObj", () => {
     const username = "Jamie1";
@@ -168,3 +184,84 @@ describe("PATCH /student/:username/profile", () => {
       });
   });
 });
+
+describe("PATCH /students/:username/avatar", () => {
+  it("200: responds with the updated student object where avatar has been changed", () => {
+    const username = "mario";
+
+    const updateUserAvatar = {
+      avatarURL: "https://i.imgur.com/yxlSmoL.png",
+    };
+    return request(app)
+      .patch(`/students/${username}/avatar`)
+      .send(updateUserAvatar)
+      .expect(200)
+      .then(({ body }) => {
+        expect.objectContaining({
+          acknowledged: true,
+        });
+      });
+  });
+});
+
+
+describe("POST /comments/:username", () => {
+  describe("POST /comments/:username", () => {
+    test("status 201: responds with a body of a posted comment", () => {
+      const commentToPost = {
+        body: "Well Done Mario!",
+      };
+      return request(app)
+        .post("/comments/mario")
+        .send(commentToPost)
+        .expect(201)
+        .then(({ body }) => {
+          expect(body.comment).toEqual({
+            acknowledged: true,
+            insertedId: expect.any(String),
+          });
+        });
+    });
+  });
+});
+
+describe("/jeoBadges", () => {
+  describe("GET /jeoBadges", () => {
+    test("status 200: returns an array of jeo-badges", () => {
+      return request(app)
+        .get("/jeoBadges")
+        .expect(200)
+        .then(({ body }) => {
+          body.badges.forEach((badge) => {
+            expect.objectContaining({
+              _id: expect.any(String),
+              animal_id: expect.any(Number),
+              country: expect.any(String),
+              animal: expect.any(String),
+              img_url: expect.any(String),
+            });
+          });
+        });
+    });
+  });
+});
+
+describe.only("/jeoBadges/:country", () => {
+  describe("GET /jeoBadges/:country", () => {
+    test("status 200: returns an array of one jeo-badge", () => {
+      return request(app)
+        .get("/jeoBadges/England")
+        .expect(200)
+        .then(({ body }) => {
+          expect.objectContaining({
+            _id: expect.any(String),
+            animal_id: expect.any(Number),
+            country: expect.any(String),
+            animal: expect.any(String),
+            img_url: expect.any(String),
+          });
+        });
+    });
+  });
+});
+

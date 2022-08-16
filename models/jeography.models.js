@@ -12,6 +12,30 @@ exports.selectStudents = () => {
   });
 };
 
+exports.selectBadges = () => {
+  return database.run().then((database) => {
+    return database
+      .collection("randomBadges")
+      .find({})
+      .toArray()
+      .then((badges) => {
+        return badges;
+      });
+  });
+};
+
+exports.selectBadge = (country) => {
+  return database.run().then((database) => {
+    return database
+      .collection("ukiBadges")
+      .find({ country: country })
+      .toArray()
+      .then((badge) => {
+        return badge;
+      });
+  });
+};
+
 exports.selectCountry = (country) => {
   return database.run().then((database) => {
     return database
@@ -70,6 +94,18 @@ exports.selectProfile = (username) => {
   });
 };
 
+exports.selectComments = (username) => {
+  return database.run().then((database) => {
+    return database
+      .collection("comments")
+      .find({ username: username })
+      .toArray()
+      .then((comments) => {
+        return comments;
+      });
+  });
+};
+
 exports.updateUserStatusByStudentUsername = (username, updateUserStatus) => {
   return database.run().then((database) => {
     return database
@@ -103,8 +139,9 @@ exports.updateRanchByUsername = (username) => {
   });
 };
 
+
 exports.updateUserObj = (username, updateUserInfo) => {
-  return database.run().then((database) => {
+ return database.run().then((database) => {
     return database
       .collection("usersDB")
       .updateOne(
@@ -123,8 +160,30 @@ exports.updateUserObj = (username, updateUserInfo) => {
         }
       )
       .then((result) => {
-        console.log(result);
         return result;
+
+exports.updateAvatarByUsername = (username, selectedAvatar) => {
+ return database.run().then((database) => {
+    return database
+      .collection("usersDB")
+      .updateOne(
+        { username: username },
+        { $set: { avatarURL: selectedAvatar } }
+      )
+      .then((student) => {
+        return student;
+      });
+  });
+};
+
+exports.insertComment = (newComment, username) => {
+  return database.run().then((database) => {
+    return database
+      .collection("comments")
+      .insertOne({ body: newComment, username: username, created_at: Date() })
+      .then((comment) => {
+        return comment;
+
       });
   });
 };

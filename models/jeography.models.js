@@ -144,7 +144,7 @@ exports.updateUserObj = (username, updateUserInfo) => {
     return database
       .collection("usersDB")
       .updateOne(
-        { username: username },
+        { user_metadata: { Username: username } },
         {
           $set: {
             type: "student",

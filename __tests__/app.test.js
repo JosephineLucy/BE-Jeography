@@ -153,3 +153,18 @@ describe("PATCH /students/:username/ranch", () => {
       });
   });
 });
+
+describe("PATCH /student/:username/profile", () => {
+  it("200: responds with the updated userObj", () => {
+    const username = "Jamie1";
+    return request(app)
+      .patch(`/student/${username}/profile`)
+      .send()
+      .expect(200)
+      .then(({ body }) => {
+        expect.objectContaining({
+          acknowledged: true,
+        });
+      });
+  });
+});

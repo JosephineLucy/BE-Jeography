@@ -123,6 +123,7 @@ exports.updateUserObj = (username, updateUserInfo) => {
         }
       )
       .then((result) => {
+        console.log(result);
         return result;
       });
   });

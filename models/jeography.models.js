@@ -139,9 +139,8 @@ exports.updateRanchByUsername = (username) => {
   });
 };
 
-
 exports.updateUserObj = (username, updateUserInfo) => {
- return database.run().then((database) => {
+  return database.run().then((database) => {
     return database
       .collection("usersDB")
       .updateOne(
@@ -161,9 +160,12 @@ exports.updateUserObj = (username, updateUserInfo) => {
       )
       .then((result) => {
         return result;
+      });
+  });
+};
 
 exports.updateAvatarByUsername = (username, selectedAvatar) => {
- return database.run().then((database) => {
+  return database.run().then((database) => {
     return database
       .collection("usersDB")
       .updateOne(
@@ -183,7 +185,6 @@ exports.insertComment = (newComment, username) => {
       .insertOne({ body: newComment, username: username, created_at: Date() })
       .then((comment) => {
         return comment;
-
       });
   });
 };

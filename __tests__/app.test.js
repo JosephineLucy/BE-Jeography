@@ -169,7 +169,6 @@ describe("PATCH /students/:username/ranch", () => {
   });
 });
 
-
 describe("PATCH /student/:username/profile", () => {
   it("200: responds with the updated userObj", () => {
     const username = "Jamie1";
@@ -203,7 +202,6 @@ describe("PATCH /students/:username/avatar", () => {
       });
   });
 });
-
 
 describe("POST /comments/:username", () => {
   describe("POST /comments/:username", () => {
@@ -246,7 +244,7 @@ describe("/jeoBadges", () => {
   });
 });
 
-describe.only("/jeoBadges/:country", () => {
+describe("/jeoBadges/:country", () => {
   describe("GET /jeoBadges/:country", () => {
     test("status 200: returns an array of one jeo-badge", () => {
       return request(app)
@@ -264,4 +262,3 @@ describe.only("/jeoBadges/:country", () => {
     });
   });
 });
-

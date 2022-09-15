@@ -139,6 +139,31 @@ exports.updateRanchByUsername = (username) => {
   });
 };
 
+exports.updateUserObj = (username, updateUserInfo) => {
+  return database.run().then((database) => {
+    return database
+      .collection("usersDB")
+      .updateOne(
+        { user_metadata: { Username: username } },
+        {
+          $set: {
+            type: "student",
+            userPoints: 0,
+            avatarURL: ["https://i.imgur.com/T5IjKoI.png"],
+            jeoRanch: [
+              "https://i.imgur.com/oxYZ7c2.png",
+              "https://i.imgur.com/T5IjKoI.png",
+            ],
+            userStatus: "Learning geography with jeography!",
+          },
+        }
+      )
+      .then((result) => {
+        return result;
+      });
+  });
+};
+
 exports.updateAvatarByUsername = (username, selectedAvatar) => {
   return database.run().then((database) => {
     return database

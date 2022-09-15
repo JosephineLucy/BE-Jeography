@@ -9,6 +9,7 @@ const {
   selectBadge,
   updateUserStatusByStudentUsername,
   updateRanchByUsername,
+  updateUserObj,
   updateAvatarByUsername,
   insertComment,
 } = require("../models/jeography.models");
@@ -81,6 +82,14 @@ exports.patchUserStatusByStudentUsername = (request, response) => {
 exports.patchRanchByUsername = (request, response) => {
   const { username } = request.params;
   updateRanchByUsername(username).then((result) => {
+    response.status(200).send({ result });
+  });
+};
+
+exports.patchUserObj = (request, response) => {
+  const { username } = request.params;
+  const updateUserInfo = request.body;
+  updateUserObj(username, updateUserInfo).then((result) => {
     response.status(200).send({ result });
   });
 };
